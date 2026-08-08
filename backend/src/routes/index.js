@@ -16,7 +16,7 @@ import { requireAuth, requireAdmin, optionalAuth as optionalAuthMw } from '../mi
 const router = Router();
 const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 25 * 1024 * 1024 } });
 
-router.get('/', (req, res) => res.json({ success: true, message: 'WOOD CARVERS API', ok: true }));
+router.get('/', (req, res) => res.json({ success: true, message: 'WOOD CARVERS ', ok: true }));
 
 // Auth
 router.post('/auth/register', auth.register);

@@ -21,7 +21,9 @@ Future<void> main() async {
     await Firebase.initializeApp();
     FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
   } catch (e) {
-    debugPrint('Firebase init skipped/failed — push notifications disabled: $e');
+    debugPrint(
+      'Firebase init skipped/failed — push notifications disabled: $e',
+    );
   }
 
   runApp(const WoodCarversApp());
