@@ -12,6 +12,9 @@ const buildTokens = async (user) => {
   return { accessToken, refreshToken };
 };
 
+
+
+
 export const register = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
   if (!name || !email || !password) throw new ApiError(400, 'name, email and password are required');
@@ -23,6 +26,8 @@ export const register = asyncHandler(async (req, res) => {
   res.status(201).json({ success: true, user, ...tokens });
 });
 
+
+
 export const login = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) throw new ApiError(400, 'email and password are required');
@@ -33,6 +38,9 @@ export const login = asyncHandler(async (req, res) => {
   const tokens = await buildTokens(user);
   res.json({ success: true, user, ...tokens });
 });
+
+
+
 
 export const refresh = asyncHandler(async (req, res) => {
   const { refreshToken } = req.body;
@@ -57,6 +65,11 @@ export const refresh = asyncHandler(async (req, res) => {
   res.json({ success: true, accessToken, refreshToken: newRefresh });
 });
 
+
+
+
+
+
 export const logout = asyncHandler(async (req, res) => {
   const { refreshToken } = req.body;
   if (req.user && refreshToken) {
@@ -66,9 +79,16 @@ export const logout = asyncHandler(async (req, res) => {
   res.json({ success: true, message: 'Logged out' });
 });
 
+
+
+
+
 export const me = asyncHandler(async (req, res) => {
   res.json({ success: true, user: req.user });
 });
+
+
+
 
 export const updateProfile = asyncHandler(async (req, res) => {
   const { name, phone, address } = req.body;
@@ -78,6 +98,9 @@ export const updateProfile = asyncHandler(async (req, res) => {
   await req.user.save();
   res.json({ success: true, user: req.user });
 });
+
+
+
 
 export const registerFcmToken = asyncHandler(async (req, res) => {
   const { token } = req.body;
