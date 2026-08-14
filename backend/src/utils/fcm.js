@@ -16,6 +16,7 @@ export const sendPushToTokens = async (tokens, notification, data = {}) => {
       Object.entries(data).map(([k, v]) => [k, String(v)])
     );
 
+    
     const response = await admin.messaging().sendEachForMulticast({
       tokens,
       notification,
