@@ -1,6 +1,6 @@
 import admin from 'firebase-admin';
 import fs from 'fs';
-
+import dotenv from "dotenv";
 // FCM (HTTP v1 API) requires the firebase-admin SDK, authenticated with a
 // service account JSON downloaded from:
 // Firebase Console -> Project Settings -> Service accounts -> Generate new private key
@@ -8,6 +8,10 @@ import fs from 'fs';
 // Set FIREBASE_SERVICE_ACCOUNT_PATH in .env to the absolute path of that
 // JSON file. NEVER commit the JSON file itself to git — add it to
 // .gitignore (see note in .env.example).
+
+dotenv.config({
+  path: "../.env",
+});
 
 let initialized = false;
 
