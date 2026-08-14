@@ -9,7 +9,7 @@ const start = async () => {
   await connectDB();
   await seedDatabase();
   app.listen(PORT, '0.0.0.0', () => {
-    console.log(`Bamboo Decor API listening on http://0.0.0.0:${PORT}`);
+    console.log(`WoodCarversStore is listening on http://0.0.0.0:${PORT}`);
   });
 };
 

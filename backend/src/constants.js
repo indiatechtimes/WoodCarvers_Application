@@ -1,4 +1,4 @@
-export const DB_NAME = process.env.DB_NAME || 'bamboo_decor';
+export const DB_NAME = process.env.DB_NAME || 'WoodCarversStore';
 
 export const ROLES = {
   USER: 'user',

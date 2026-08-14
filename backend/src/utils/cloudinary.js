@@ -19,8 +19,11 @@ export const isCloudinaryConfigured = () => {
   configure();
   return configured;
 };
+if (configured) {
+  console.log("Cloudinary is connected");
+}
 
-export const uploadBufferToCloudinary = (buffer, resourceType = 'image', folder = 'bamboo-decor') =>
+export const uploadBufferToCloudinary = (buffer, resourceType = 'image', folder = 'WoodCarversStore') =>
   new Promise((resolve, reject) => {
     configure();
     if (!configured) return reject(new Error('Cloudinary not configured'));
