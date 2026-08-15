@@ -24,11 +24,18 @@ class _AppFooterState extends State<AppFooter> {
 
   void _subscribe() {
     if (!_emailCtrl.text.contains('@')) {
-      Get.snackbar('Error', 'Please enter a valid email', snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar(
+        'Error',
+        'Please enter a valid email',
+        snackPosition: SnackPosition.BOTTOM,
+      );
       return;
     }
-    Get.snackbar('Welcome to the WOOD CARVERS list', '10% off is on its way',
-        snackPosition: SnackPosition.BOTTOM);
+    Get.snackbar(
+      'Welcome to the WOOD CARVERS list',
+      '10% off is on its way',
+      snackPosition: SnackPosition.BOTTOM,
+    );
     _emailCtrl.clear();
   }
 
@@ -50,28 +57,55 @@ class _AppFooterState extends State<AppFooter> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('WOOD CARVERS',
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(color: AppColors.primary)),
+          Text(
+            'WOOD CARVERS',
+            style: Theme.of(
+              context,
+            ).textTheme.titleLarge?.copyWith(color: AppColors.primary),
+          ),
           const SizedBox(height: 12),
           const Text(
-            'A small studio in India crafting timeless wooden décor, gifts and personalised heirlooms. Each piece is finished by hand.',
-            style: TextStyle(fontSize: 13, color: AppColors.mutedForeground, height: 1.5),
+            'A small studio in Kolkata , India crafting timeless wooden décor, gifts and personalised heirlooms. Each piece is finished by hand.',
+            style: TextStyle(
+              fontSize: 13,
+              color: AppColors.mutedForeground,
+              height: 1.5,
+            ),
           ),
           const SizedBox(height: 16),
-          const Row(children: [
-            Icon(Icons.mail_outline, size: 14, color: AppColors.primary),
-            SizedBox(width: 8),
-            Text('hello@woodcarvers.co', style: TextStyle(fontSize: 13, color: AppColors.primary)),
-          ]),
+          const Row(
+            children: [
+              Icon(Icons.mail_outline, size: 14, color: AppColors.primary),
+              SizedBox(width: 8),
+              Text(
+                '@WoodCarversStore.com',
+                style: TextStyle(fontSize: 13, color: AppColors.primary),
+              ),
+            ],
+          ),
           const SizedBox(height: 6),
-          const Row(children: [
-            Icon(Icons.location_on_outlined, size: 14, color: AppColors.primary),
-            SizedBox(width: 8),
-            Text('Jodhpur, Rajasthan · India', style: TextStyle(fontSize: 13, color: AppColors.primary)),
-          ]),
+          const Row(
+            children: [
+              Icon(
+                Icons.location_on_outlined,
+                size: 14,
+                color: AppColors.primary,
+              ),
+              SizedBox(width: 8),
+              Text(
+                'Kolkata, Assam ,  · India',
+                style: TextStyle(fontSize: 13, color: AppColors.primary),
+              ),
+            ],
+          ),
           const SizedBox(height: 28),
 
-          Text('SHOP', style: Theme.of(context).textTheme.labelSmall?.copyWith(letterSpacing: 2)),
+          Text(
+            'SHOP',
+            style: Theme.of(
+              context,
+            ).textTheme.labelSmall?.copyWith(letterSpacing: 2),
+          ),
           const SizedBox(height: 10),
           Wrap(
             spacing: 16,
@@ -80,13 +114,24 @@ class _AppFooterState extends State<AppFooter> {
               for (final c in _categories)
                 GestureDetector(
                   onTap: () => Get.toNamed('${Routes.shop}?category=${c.$2}'),
-                  child: Text(c.$1, style: const TextStyle(fontSize: 13, color: AppColors.foreground)),
+                  child: Text(
+                    c.$1,
+                    style: const TextStyle(
+                      fontSize: 13,
+                      color: AppColors.foreground,
+                    ),
+                  ),
                 ),
             ],
           ),
           const SizedBox(height: 28),
 
-          Text('NEWSLETTER', style: Theme.of(context).textTheme.labelSmall?.copyWith(letterSpacing: 2)),
+          Text(
+            'NEWSLETTER',
+            style: Theme.of(
+              context,
+            ).textTheme.labelSmall?.copyWith(letterSpacing: 2),
+          ),
           const SizedBox(height: 10),
           const Text(
             'Sign up for 10% off your first heirloom + early access to seasonal collections.',
@@ -98,11 +143,14 @@ class _AppFooterState extends State<AppFooter> {
               Expanded(
                 child: TextField(
                   controller: _emailCtrl,
-                  decoration: const InputDecoration(hintText: 'you@home.co'),
+                  decoration: const InputDecoration(hintText: 'you@gmail.com'),
                 ),
               ),
               const SizedBox(width: 8),
-              ElevatedButton(onPressed: _subscribe, child: const Text('Subscribe')),
+              ElevatedButton(
+                onPressed: _subscribe,
+                child: const Text('Subscribe'),
+              ),
             ],
           ),
           const SizedBox(height: 32),
@@ -111,7 +159,10 @@ class _AppFooterState extends State<AppFooter> {
           Center(
             child: Text(
               '© ${DateTime.now().year} WOOD CARVERS · Handcrafted with care in India',
-              style: const TextStyle(fontSize: 11, color: AppColors.mutedForeground),
+              style: const TextStyle(
+                fontSize: 11,
+                color: AppColors.mutedForeground,
+              ),
             ),
           ),
         ],

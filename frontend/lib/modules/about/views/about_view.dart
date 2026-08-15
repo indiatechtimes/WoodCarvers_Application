@@ -6,7 +6,7 @@ import '../../../widgets/app_drawer.dart';
 import '../../../widgets/app_footer.dart';
 
 const _paragraphs = [
-  'WOOD CARVERS began in 2018 as a conversation between three friends and a third-generation carpenter in a village outside Jodhpur. What began as an experiment — the way walnut felt under a plane, the way teak took an oil finish — became a small studio, then a workshop, then a family of 14 master artisans.',
+  'WOOD CARVERS began in 2026 as a conversation between three friends and a third-generation carpenter in a village outside Kolkata. What began as an experiment — the way walnut felt under a plane, the way teak took an oil finish — became a small studio, then a workshop, then a family of 14 master artisans.',
   'We choose walnut, sheesham, teak, mango and acacia from managed forests. We season each cut for months before it becomes an object, and we finish every piece with natural oils and beeswax.',
   'Every WOOD CARVERS object is an heirloom in the making: we make only what feels needed, and only as many as we can care for.',
 ];
@@ -15,7 +15,7 @@ const _stats = [
   ('14+', 'Master artisans'),
   ('4.9★', 'Buyer rating'),
   ('12,000+', 'Homes'),
-  ('2018', 'Since'),
+  ('2026', 'Since'),
 ];
 
 class AboutView extends StatelessWidget {
@@ -45,7 +45,7 @@ class AboutView extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    'A small studio in Jodhpur, working at the pace of wood.',
+                    'A small studio in Kolkata, working at the pace of wood.',
                     style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                       color: AppColors.primary,
                       height: 1.15,
