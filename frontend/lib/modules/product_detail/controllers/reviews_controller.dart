@@ -1,4 +1,4 @@
-import 'dart:io';
+//import 'dart:io';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../app/controllers/auth_controller.dart';
@@ -78,7 +78,7 @@ class ReviewsController extends GetxController {
 
     uploading.value = true;
     try {
-      final photo = await _repo.uploadReviewPhoto(File(picked.path));
+      final photo = await _repo.uploadReviewPhoto(picked);
       formPhotos.add(photo);
     } catch (_) {
       Get.snackbar('Error', 'Upload failed', snackPosition: SnackPosition.BOTTOM);

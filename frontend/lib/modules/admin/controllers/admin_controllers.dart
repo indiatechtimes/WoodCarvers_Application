@@ -1,4 +1,4 @@
-import 'dart:io';
+//import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -43,7 +43,14 @@ class AdminDashboardController extends GetxController {
 
 // ---------------- Products ----------------
 
-const kAdminCategories = ['wall-decor', 'home-decor', 'kitchen', 'office', 'gifts', 'personalized'];
+const kAdminCategories = [
+  'wall-decor',
+  'home-decor',
+  'kitchen',
+  'office',
+  'gifts',
+  'personalized',
+];
 
 class AdminProductsController extends GetxController {
   final _repo = ProductRepository();
@@ -88,7 +95,9 @@ class AdminProductsController extends GetxController {
   Future<void> load() async {
     loading.value = true;
     try {
-      final result = await _repo.listProducts(params: {'limit': 100, 'sort': '-createdAt'});
+      final result = await _repo.listProducts(
+        params: {'limit': 100, 'sort': '-createdAt'},
+      );
       products.value = result.products;
     } catch (_) {
       // keep empty
@@ -130,7 +139,9 @@ class AdminProductsController extends GetxController {
     brandCtrl.text = p.brand;
     priceCtrl.text = p.price.toString();
     compareAtPriceCtrl.text = p.compareAtPrice.toString();
-    category.value = kAdminCategories.contains(p.category) ? p.category : kAdminCategories.first;
+    category.value = kAdminCategories.contains(p.category)
+        ? p.category
+        : kAdminCategories.first;
     stockCtrl.text = p.stock.toString();
     colorCtrl.text = p.color;
     dimensionsCtrl.text = p.dimensions;
@@ -153,14 +164,21 @@ class AdminProductsController extends GetxController {
 
   Future<void> uploadMedia() async {
     final picker = ImagePicker();
-    final picked = await picker.pickImage(source: ImageSource.gallery, imageQuality: 85);
+    final picked = await picker.pickImage(
+      source: ImageSource.gallery,
+      imageQuality: 85,
+    );
     if (picked == null) return;
     uploading.value = true;
     try {
-      final m = await _mediaRepo.upload(File(picked.path));
+      final m = await _mediaRepo.upload(picked);
       media.add(m);
     } catch (_) {
-      Get.snackbar('Error', 'Upload failed', snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar(
+        'Error',
+        'Upload failed',
+        snackPosition: SnackPosition.BOTTOM,
+      );
     } finally {
       uploading.value = false;
     }
@@ -176,14 +194,20 @@ class AdminProductsController extends GetxController {
 
   Future<void> save() async {
     if (nameCtrl.text.trim().isEmpty || descriptionCtrl.text.trim().isEmpty) {
-      Get.snackbar('Missing fields', 'Name and description are required', snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar(
+        'Missing fields',
+        'Name and description are required',
+        snackPosition: SnackPosition.BOTTOM,
+      );
       return;
     }
     saving.value = true;
     final payload = {
       'name': nameCtrl.text.trim(),
       'sku': skuCtrl.text.trim(),
-      'brand': brandCtrl.text.trim().isEmpty ? 'WOOD CARVERS' : brandCtrl.text.trim(),
+      'brand': brandCtrl.text.trim().isEmpty
+          ? 'WOOD CARVERS'
+          : brandCtrl.text.trim(),
       'price': double.tryParse(priceCtrl.text) ?? 0,
       'compareAtPrice': double.tryParse(compareAtPriceCtrl.text) ?? 0,
       'category': category.value,
@@ -191,8 +215,16 @@ class AdminProductsController extends GetxController {
       'color': colorCtrl.text.trim(),
       'dimensions': dimensionsCtrl.text.trim(),
       'weight': weightCtrl.text.trim(),
-      'tags': tagsCtrl.text.split(',').map((s) => s.trim()).where((s) => s.isNotEmpty).toList(),
-      'materials': materialsCtrl.text.split(',').map((s) => s.trim()).where((s) => s.isNotEmpty).toList(),
+      'tags': tagsCtrl.text
+          .split(',')
+          .map((s) => s.trim())
+          .where((s) => s.isNotEmpty)
+          .toList(),
+      'materials': materialsCtrl.text
+          .split(',')
+          .map((s) => s.trim())
+          .where((s) => s.isNotEmpty)
+          .toList(),
       'shortDescription': shortDescriptionCtrl.text.trim(),
       'description': descriptionCtrl.text.trim(),
       'seoTitle': seoTitleCtrl.text.trim(),
@@ -201,7 +233,9 @@ class AdminProductsController extends GetxController {
       'bestSeller': bestSeller.value,
       'newArrival': newArrival.value,
       'published': published.value,
-      'media': media.map((m) => {'url': m.url, 'publicId': m.publicId, 'type': m.type}).toList(),
+      'media': media
+          .map((m) => {'url': m.url, 'publicId': m.publicId, 'type': m.type})
+          .toList(),
     };
     try {
       if (editingId.value != null) {
@@ -213,7 +247,11 @@ class AdminProductsController extends GetxController {
       editorOpen.value = false;
       await load();
     } catch (e) {
-      Get.snackbar('Error', 'Failed to save product', snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar(
+        'Error',
+        'Failed to save product',
+        snackPosition: SnackPosition.BOTTOM,
+      );
     } finally {
       saving.value = false;
     }
@@ -225,7 +263,11 @@ class AdminProductsController extends GetxController {
       Get.snackbar('Deleted', '', snackPosition: SnackPosition.BOTTOM);
       await load();
     } catch (_) {
-      Get.snackbar('Error', 'Failed to delete product', snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar(
+        'Error',
+        'Failed to delete product',
+        snackPosition: SnackPosition.BOTTOM,
+      );
     }
   }
 
@@ -252,7 +294,15 @@ class AdminProductsController extends GetxController {
 
 // ---------------- Orders ----------------
 
-const kOrderStatuses = ['pending', 'paid', 'processing', 'shipped', 'delivered', 'cancelled', 'failed'];
+const kOrderStatuses = [
+  'pending',
+  'paid',
+  'processing',
+  'shipped',
+  'delivered',
+  'cancelled',
+  'failed',
+];
 
 class AdminOrdersController extends GetxController {
   final _repo = OrderRepository();
@@ -283,7 +333,11 @@ class AdminOrdersController extends GetxController {
       Get.snackbar('Updated', '', snackPosition: SnackPosition.BOTTOM);
       await load();
     } catch (_) {
-      Get.snackbar('Error', 'Could not update status', snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar(
+        'Error',
+        'Could not update status',
+        snackPosition: SnackPosition.BOTTOM,
+      );
     }
   }
 }
@@ -352,7 +406,11 @@ class AdminCouponsController extends GetxController {
 
   Future<void> save() async {
     if (codeCtrl.text.trim().isEmpty) {
-      Get.snackbar('Missing code', 'Enter a coupon code', snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar(
+        'Missing code',
+        'Enter a coupon code',
+        snackPosition: SnackPosition.BOTTOM,
+      );
       return;
     }
     saving.value = true;
@@ -375,7 +433,11 @@ class AdminCouponsController extends GetxController {
       editorOpen.value = false;
       await load();
     } catch (e) {
-      Get.snackbar('Error', 'Failed to save coupon', snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar(
+        'Error',
+        'Failed to save coupon',
+        snackPosition: SnackPosition.BOTTOM,
+      );
     } finally {
       saving.value = false;
     }
@@ -387,7 +449,11 @@ class AdminCouponsController extends GetxController {
       Get.snackbar('Deleted', '', snackPosition: SnackPosition.BOTTOM);
       await load();
     } catch (_) {
-      Get.snackbar('Error', 'Failed to delete coupon', snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar(
+        'Error',
+        'Failed to delete coupon',
+        snackPosition: SnackPosition.BOTTOM,
+      );
     }
   }
 
@@ -470,7 +536,10 @@ class AdminBannersController extends GetxController {
   Future<void> savePromo() async {
     saving.value = true;
     try {
-      final value = {'text': promoTextCtrl.text.trim(), 'active': promoActive.value};
+      final value = {
+        'text': promoTextCtrl.text.trim(),
+        'active': promoActive.value,
+      };
       await _repo.updateSetting('promo_banner', value);
       settings['promo_banner'] = value;
       Get.snackbar('Saved', '', snackPosition: SnackPosition.BOTTOM);
@@ -483,15 +552,22 @@ class AdminBannersController extends GetxController {
 
   Future<void> uploadHero() async {
     final picker = ImagePicker();
-    final picked = await picker.pickImage(source: ImageSource.gallery, imageQuality: 85);
+    final picked = await picker.pickImage(
+      source: ImageSource.gallery,
+      imageQuality: 85,
+    );
     if (picked == null) return;
     try {
-      final m = await _mediaRepo.upload(File(picked.path));
+      final m = await _mediaRepo.upload(picked);
       settings['hero_image'] = m.url;
       await _repo.updateSetting('hero_image', m.url);
       Get.snackbar('Hero updated', '', snackPosition: SnackPosition.BOTTOM);
     } catch (_) {
-      Get.snackbar('Error', 'Upload failed', snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar(
+        'Error',
+        'Upload failed',
+        snackPosition: SnackPosition.BOTTOM,
+      );
     }
   }
 
