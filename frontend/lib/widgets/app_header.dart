@@ -44,18 +44,28 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: const Center(
-                child: Text('WC',
-                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13)),
+                child: Text(
+                  'WC',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 13,
+                  ),
+                ),
               ),
             ),
             const SizedBox(width: 8),
-            Text('WOOD CARVERS',
+            Expanded(
+              child: Text(
+                'WOOD CARVERS',
                 style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                      color: AppColors.primary,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 1.2,
-                      fontSize: 13,
-                    )),
+                  color: AppColors.primary,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1.2,
+                  fontSize: 13,
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -64,7 +74,9 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
           icon: const Icon(Icons.search),
           onPressed: () => showSearch(
             context: context,
-            delegate: _SearchDelegate(onSubmit: (q) => _submitSearch(context, q)),
+            delegate: _SearchDelegate(
+              onSubmit: (q) => _submitSearch(context, q),
+            ),
           ),
         ),
         Obx(() {
@@ -91,33 +103,47 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
         }),
         Padding(
           padding: const EdgeInsets.only(right: 8),
-          child: Obx(() => Stack(
-                clipBehavior: Clip.none,
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.shopping_bag_outlined),
-                    style: IconButton.styleFrom(
-                      backgroundColor: AppColors.primary,
-                      foregroundColor: AppColors.primaryForeground,
-                      shape: const CircleBorder(),
-                    ),
-                    onPressed: () => showCartDrawer(),
+          child: Obx(
+            () => Stack(
+              clipBehavior: Clip.none,
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.shopping_bag_outlined),
+                  style: IconButton.styleFrom(
+                    backgroundColor: AppColors.primary,
+                    foregroundColor: AppColors.primaryForeground,
+                    shape: const CircleBorder(),
                   ),
-                  if (cart.count > 0)
-                    Positioned(
-                      top: -2,
-                      right: -2,
-                      child: Container(
-                        padding: const EdgeInsets.all(4),
-                        decoration: const BoxDecoration(color: AppColors.accent, shape: BoxShape.circle),
-                        constraints: const BoxConstraints(minWidth: 18, minHeight: 18),
-                        child: Text('${cart.count}',
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(fontSize: 10, color: AppColors.primary, fontWeight: FontWeight.bold)),
+                  onPressed: () => showCartDrawer(),
+                ),
+                if (cart.count > 0)
+                  Positioned(
+                    top: -2,
+                    right: -2,
+                    child: Container(
+                      padding: const EdgeInsets.all(4),
+                      decoration: const BoxDecoration(
+                        color: AppColors.accent,
+                        shape: BoxShape.circle,
+                      ),
+                      constraints: const BoxConstraints(
+                        minWidth: 18,
+                        minHeight: 18,
+                      ),
+                      child: Text(
+                        '${cart.count}',
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 10,
+                          color: AppColors.primary,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
-                ],
-              )),
+                  ),
+              ],
+            ),
+          ),
         ),
       ],
     );
@@ -130,12 +156,14 @@ class _SearchDelegate extends SearchDelegate<String> {
 
   @override
   List<Widget> buildActions(BuildContext context) => [
-        IconButton(icon: const Icon(Icons.clear), onPressed: () => query = ''),
-      ];
+    IconButton(icon: const Icon(Icons.clear), onPressed: () => query = ''),
+  ];
 
   @override
-  Widget buildLeading(BuildContext context) =>
-      IconButton(icon: const Icon(Icons.arrow_back), onPressed: () => close(context, ''));
+  Widget buildLeading(BuildContext context) => IconButton(
+    icon: const Icon(Icons.arrow_back),
+    onPressed: () => close(context, ''),
+  );
 
   @override
   Widget buildResults(BuildContext context) {
